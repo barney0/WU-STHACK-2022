@@ -23,7 +23,7 @@ fly and not stored on the hard drive\".
 
 Example:
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdf.png)
+![aaa](img/testpdf.png)
 
 We get the following output:
 
