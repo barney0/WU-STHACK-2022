@@ -23,17 +23,17 @@ fly and not stored on the hard drive\".
 
 Example:
 
-![aaa](img/testpdf.png)
+![](img/testpdf.png)
 
 We get the following output:
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput.png)
+![](img/testpdfoutput.png)
 
 ## Technology to create PDF
 
 Analyzing the Burp response's server, we get this:
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput5.png)
+![](img/testpdfoutput5.png)
 
 We know that it uses **HtmlToPdf** which mean that we may be able to
 execute some HTML and JavaScript code.
@@ -62,7 +62,7 @@ We inject some HTML code like:
 
 Which seems to be interpreted:
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput2.png)
+![](img/testpdfoutput2.png)
 
 Then we try some JavaScript injection:
 
@@ -70,7 +70,7 @@ Then we try some JavaScript injection:
 <script>document.write("A");</script>
 ```
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput3.png)
+![](img/testpdfoutput3.png)
 
 We get the \"A\" letter written. **The JavaScript is executed!**
 
@@ -89,7 +89,7 @@ blog.noob.ninja](https://blog.noob.ninja/local-file-read-via-xss-in-dynamically-
 </script>
 ```
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput4.png)
+![](img/testpdfoutput4.png)
 
 This will give us the output of the /etc/shadow file telling us that the
 application is running as root and then that we can leak some system
@@ -120,7 +120,7 @@ we noticed some default configuration files including the
 </script>
 ```
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput6.png)
+![](img/testpdfoutput6.png)
 
 The output confirms that we face a .NET Core application and that the
 path is /app.
@@ -150,7 +150,7 @@ oReq.send(null);
 We try to retrieve the content of the /app/web.config file, encode it,
 and write the output into the PDF.
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput10.png)
+![](img/testpdfoutput10.png)
 
 We can extract the content of the PDF file using python:
 
@@ -169,7 +169,7 @@ with open("web.config", 'w') as fichier:
 
 We get the following output:
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput8-1024x164.png)
+![](img/testpdfoutput8-1024x164.png)
 
 The **OnlinePdfMarker.dll** file on ./ got our attention. We try to
 retrieve it using the same method:
@@ -237,7 +237,7 @@ oReq.send();
 </script>
 ```
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/testpdfoutput9.png)
+![](img/testpdfoutput9.png)
 
 Ok, to be honest, this step made [my teammate](https://twitter.com/g0h4n_0) and I crazy! We were able to get
 many .dll file but still not working in DnSpy for the end of the
@@ -280,7 +280,7 @@ OnlinePdfMaker.dll: PE32 executable (console) Intel 80386 Mono/.Net assembly, fo
 
 Lets open this beautiful .dll in DnSpy:
 
-![](https://www.opencyber.com/wp-content/uploads/2021/10/dll.png)
+![](img/dll.png)
 
 ``` {.wp-block-syntaxhighlighter-code .code}
 public IActionResult Index(string txtValue, string keyValue)
