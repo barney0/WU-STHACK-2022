@@ -37,8 +37,7 @@ Next file: **/proc/mounts**
 ![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_0-1.png)
 
 There is the file **flag_random_name\_\*** in the root directory. But it
-is not reachable directly with this first vulnerability. You will\
-understand why exactly after leaking another file.
+is not reachable directly with this first vulnerability. You will understand why exactly after leaking another file.
 
 Also, there is a **/site** as well. There source code could be stored
 here.
@@ -49,7 +48,7 @@ understand what the comand line of the current process is doing:
 ![](https://www.opencyber.com/wp-content/uploads/2022/05/CHALL_LFI_1-1.png)
 
 This is actually \"node chall.js\". The filename is **chall.js** which
-may be located in the /site directory. Let\'s leak it using the same\
+may be located in the /site directory. Let\'s leak it using the same
 vulnerability.
 
 The bellow part of the source code shows why it is not possible to reach
@@ -72,7 +71,7 @@ URL:
 ![](https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_1-1.png)
 
 The parameter needs to start with **\"http\"** in order to take a
-screenshot of the remote page. The **takeScreenshot** function is the\
+screenshot of the remote page. The **takeScreenshot** function is the
 following:
 
 ![](https://www.opencyber.com/wp-content/uploads/2022/05/LEAK_CODE_2-2-1024x169.png)
@@ -93,11 +92,11 @@ We retrieve the Chrome version which seems very interesting (and not up to date)
 So the browser used Chrome on version **89.0.4389.72**.
 
 A quick (**no, kidding, it took times!**) research on
-<https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=chrome> lead to the\
+<https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=chrome> lead to the
 following CVE:
 
 **CVE-2021-30551** - Type confusion in V8 in Google Chrome prior to
-91.0.4472.101 allowed a remote attacker to potentially exploit heap\
+91.0.4472.101 allowed a remote attacker to potentially exploit heap
 corruption via a crafted HTML page.
 
 Searching a Proof-of-Concept, the following link helped us to exploit
@@ -161,8 +160,8 @@ Thus the flag was\... Oops, cannot say, did not get the one during the
 night!
 
 Thanks **[Laluka](https://twitter.com/TheLaluka)** for the challenge and
-the [STHACK](https://sthack.fr) for the event!\
-\
+the [STHACK](https://sthack.fr) for the event!
+
 The challenges have been made public and can be found here:
 [https://gitlab.com/TheLaluka/headless-updateless-brainless](https://gitlab.com/TheLaluka/headless-updateless-brainless)
 
